@@ -1,4 +1,6 @@
 // Errors that need to be fixed
+// Dividing a number by a decimal appends the decimal to the displayNumber.value
+// but still produces proper result when calculated
 
 // All preloaded declarations
 
@@ -135,6 +137,9 @@ function appendDecimal() {
         };
     } else {
         if (!checkDecimal(secondNumber)) {
+            if (secondNumber.length < 1) {
+                clearDisplay();
+            };
             secondNumber += ".";
             $displayNumber.value += ".";
         };
@@ -152,5 +157,5 @@ function checkDecimal(input) {
 };
 
 function clearDisplay() {
-    $displayNumber.value = "";
+    $displayNumber.value = "0";
 }
