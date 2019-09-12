@@ -1,5 +1,5 @@
 // Errors that need to be fixed
-// Subtracting decimals -> Correctly solves math but displayNunmber appends both decimals
+// Subtracting decimals -> Correctly solves math but displayNumber appends both decimals
 // Multiple decimals can be added
 
 // All preloaded declarations
@@ -58,6 +58,10 @@ function changeNumber(input) {
 };
 
 function changeFirstNumber(input) {
+    if (firstNumber.length > 10) {
+        return;
+    };
+
     if (firstNumber.length != 0) {
         firstNumber = appendNumbers(firstNumber, input.value);
         $displayNumber.value = appendNumbers($displayNumber.value, input.value);
@@ -68,6 +72,10 @@ function changeFirstNumber(input) {
 }
 
 function changeSecondNumber(input) {
+    if (secondNumber.length >10) {
+        return;
+    };
+
     if (secondNumber.length != 0) {
         secondNumber = appendNumbers(secondNumber, input.value);
         $displayNumber.value = appendNumbers($displayNumber.value, input.value);
@@ -86,6 +94,10 @@ function clearCalc() {
 };
 
 function chooseOperator(input) {
+    if (firstNumber.length == 0) {
+        return;
+    };
+
     if (storedOperator.length > 0 && secondNumber.length > 0) {
         compute();
     } else if (storedOperator.length > 0 && secondNumber.length == 0) {
@@ -97,6 +109,10 @@ function chooseOperator(input) {
 };
 
 function compute() {
+    if (firstNumber.length == 0 || storedOperator.length == 0 || secondNumber.length == 0) {
+        return;
+    };
+
     $displayNumber.value = operate(storedOperator, parseFloat(firstNumber), parseFloat(secondNumber));
 
     if ($displayNumber.value.length > 10) {
@@ -115,11 +131,25 @@ function appendNumbers(num1,num2) {
 
 function appendDecimal() {
     if (storedOperator.length < 1) {
-        firstNumber += ".";
-        $displayNumber.value += ".";
+        if (!checkDecimal(firstNumber)) {
+            firstNumber += ".";
+            $displayNumber.value += ".";
+        };
     } else {
-        secondNumber += ".";
-        $displayNumber.value += ".";
+        if (!checkDecimal(secondNumber)) {
+            secondNumber += ".";
+            $displayNumber.value += ".";
+        };
+    };
+};
+
+function checkDecimal(input) {
+    var numArr = input.split("");
+
+    if (numArr.includes(".")) {
+        return true
+    } else {
+        return false
     };
 };
 
