@@ -1,6 +1,4 @@
 // Errors that need to be fixed
-// Subtracting decimals -> Correctly solves math but displayNumber appends both decimals
-// Multiple decimals can be added
 
 // All preloaded declarations
 
